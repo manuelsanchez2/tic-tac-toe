@@ -5,22 +5,25 @@ import Square from "./Square";
 export default function Board() {
 
   const [squares, setSquares] = React.useState([
-    "🐼",null,"🐶",
-    "🐶","🐶","🐼",
-    "🐼",null,null,
+    null,null,null,
+    null,null,null,
+    null,null,null,
   ]);
+  const [pandaIsNext, setPandaIsNext] = React.useState(true);
 
-  const status = "Next player: 🐼";
+  const status = pandaIsNext ? "Next player: 🐼" : "Next player: 🐶";
 
   const handleClick = (index) => {
     //copy squares -- shallow copy / flache Kopie - si no le decimos start, end, va a empezar desde el principio...
+    
     const squaresCopy = squares.slice();
 
     //modify value by index
-    squaresCopy[index] = "🐼";
-
+    squaresCopy[index] = pandaIsNext ? "🐼" : "🐶";
+    // squaresCopy[index] = "🐼";
     //set me the state
     setSquares(squaresCopy);
+    setPandaIsNext(!pandaIsNext);
   }
   return (
     <div>
