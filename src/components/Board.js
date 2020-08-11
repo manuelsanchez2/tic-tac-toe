@@ -10,11 +10,17 @@ export default function Board() {
     "🐼",null,null,
   ]);
 
-  const status = "Next player: 🐶";
+  const status = "Next player: 🐼";
 
   const handleClick = (index) => {
-    alert("INDEX: " + index);
-    setSquares(["🐼",null,"🐶","🐶","🐶","🐶","🐶",null,null,])
+    //copy squares -- shallow copy / flache Kopie - si no le decimos start, end, va a empezar desde el principio...
+    const squaresCopy = squares.slice();
+
+    //modify value by index
+    squaresCopy[index] = "🐼";
+
+    //set me the state
+    setSquares(squaresCopy);
   }
   return (
     <div>
