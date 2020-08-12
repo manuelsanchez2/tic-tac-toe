@@ -1,17 +1,26 @@
 import "./board.css";
 import React from "react";
 import Square from "./Square";
+import { calculateWinner } from "../api/game";
+
 
 export default function Board() {
 
-  const [squares, setSquares] = React.useState([
-    null,null,null,
-    null,null,null,
-    null,null,null,
-  ]);
+  // const [squares, setSquares] = React.useState([
+  //   null,null,null,
+  //   null,null,null,
+  //   null,null,null,
+  // ]);
+  const [squares, setSquares] = React.useState(Array(9).fill(null))
   const [pandaIsNext, setPandaIsNext] = React.useState(true);
 
-  const status = pandaIsNext ? "Next player: 🐼" : "Next player: 🐶";
+  const winner = calculateWinner(squares);
+  let status;
+  if (winner) {
+    status = "The winner is " + winner;
+  } else {
+    status = pandaIsNext ? "Next player: 🐼" : "Next player: 🐶";
+  }
 
   const handleClick = (index) => {
     //copy squares -- shallow copy / flache Kopie - si no le decimos start, end, va a empezar desde el principio...
